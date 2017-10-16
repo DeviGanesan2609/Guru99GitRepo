@@ -65,7 +65,7 @@ public class LoginPage extends TestBaseGuru99 implements Constants
 	
 	public static void performLogin() throws IOException
 	{
-		TestBaseGuru99.openXL();
+			TestBaseGuru99.openXL();
 		int rowNum = sheet.getLastRowNum();
 		for(int i=1;i<=rowNum;i++)
 		{
@@ -75,10 +75,11 @@ public class LoginPage extends TestBaseGuru99 implements Constants
 		clickLogin();
 		//wait = new WebDriverWait(driver,30);
 		//boolean result =wait.until(ExpectedConditions.alertIsPresent()) != null;
-		boolean result =ExpectedConditions.alertIsPresent() != null;
-		System.out.println(result);
-		if(result==true)
+		 //boolean result =ExpectedConditions.alertIsPresent() != null;
+		 //System.out.println(result);
+		//if(result==true)
 		//if(ExpectedConditions.alertIsPresent() != null)
+		try
 		{	//wait = new WebDriverWait(driver,15);
 			System.out.println("Alert Displayed");
 			alert = driver.switchTo().alert();
@@ -92,9 +93,13 @@ public class LoginPage extends TestBaseGuru99 implements Constants
 			writeXL();
 			System.out.println("Row  : "+ i + "Err msg written into XL");
 		}
-		else 
+		catch (Exception e)
+		{
+		System.out.println(e.getMessage());
+		}
+		finally 
 		{	
-			System.out.println(result);
+			 //System.out.println(result);
 			if(driver.getTitle().equals("Guru99 Bank Manager HomePage"))
 			{
 				sheet.getRow(i).createCell(4).setCellValue("Pass");
